@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       toCity: order.addressCity,
       toState: order.addressState,
       orderId: order.id,
-      products: order.items.map((i) => ({
+      products: order.items.map((i: typeof order.items[number]) => ({
         weight: i.product.weight,
         height: i.product.height,
         width: i.product.width,
