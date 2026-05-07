@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ContatoPage() {
   return (
-    <main className="bg-[#F7F3EE] min-h-screen">
+    <main className="bg-[#d4cec7] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-28">
         <p className="text-[#C8A96E] text-xs tracking-[0.3em] uppercase font-sans mb-4">Fale conosco</p>
         <h1 className="font-serif text-4xl md:text-5xl font-bold text-[#2C1A0E] text-balance mb-12">
