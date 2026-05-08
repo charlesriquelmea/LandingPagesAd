@@ -64,7 +64,7 @@ export async function POST(request: Request) {
           id: order.id,
           customerName: order.customerName,
           customerEmail: order.customerEmail,
-          items: order.items.map((i) => ({
+          items: order.items.map((i: typeof order.items[number]) => ({
             name: i.product.name,
             quantity: i.quantity,
             unitPrice: i.unitPrice,
