@@ -107,7 +107,7 @@ export function CheckoutWhatsApp() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#F7F3EE] pt-24 flex flex-col items-center justify-center gap-6 px-6">
+      <div className="min-h-screen bg-[#d4cec7] pt-24 flex flex-col items-center justify-center gap-6 px-6">
         <p className="font-serif text-3xl text-[#2C1A0E] font-bold text-center">Seu carrinho está vazio</p>
         <p className="text-[#777] font-sans text-center">Adicione uma de nossas bolsas artesanais para continuar.</p>
         <a
@@ -121,7 +121,7 @@ export function CheckoutWhatsApp() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F3EE] pt-16">
+    <div className="min-h-screen bg-[#d4cec7] pt-16">
       <div className="max-w-2xl mx-auto px-6 py-12">
         <h1 className="font-serif text-3xl font-bold text-[#2C1A0E] mb-8">Finalizar pedido</h1>
 
@@ -250,7 +250,9 @@ export function CheckoutWhatsApp() {
           <Button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full py-4 bg-[#2C1A0E] hover:bg-[#3d2510] text-[#F7F3EE] text-base font-semibold rounded-full mt-4 flex items-center justify-center gap-2"
+            className="w-full py-4 bg-[#2C1A0E] hover:bg-[#3d2510] 
+            text-[#F7F3EE] text-base font-semibold rounded-full 
+            mt-4 flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? (
               <Loader2 size={18} className="animate-spin" />
