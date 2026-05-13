@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { PRODUCTS } from '@/lib/products'
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://confeccaocafebrasil.com.br'
+const BASE_URL = 'https://confeccaocafebrasil.com.br'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

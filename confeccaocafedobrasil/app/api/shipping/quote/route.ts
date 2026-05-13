@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const { cep, items } = schema.parse(body)
 
     const quotes = await getShippingQuote({
-      fromCep: process.env.SENDER_CEP ?? '37540000',
+      fromCep: '37540000',
       toCep: cep.replace(/\D/g, ''),
       products: items,
     })

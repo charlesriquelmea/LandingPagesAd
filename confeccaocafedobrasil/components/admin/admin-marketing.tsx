@@ -30,7 +30,7 @@ export function AdminMarketing() {
     url: `${base}?utm_source=${src}&utm_medium=${src === 'email' ? 'email' : 'social'}&utm_campaign=${encodeURIComponent(campaign)}`,
   }))
 
-  const pixelId = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_META_PIXEL_ID : undefined
+  const pixelId = undefined
 
   return (
     <div className="p-6 md:p-8 flex flex-col gap-8">

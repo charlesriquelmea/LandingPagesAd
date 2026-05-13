@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function OrderShippedEmail({ order }: Props) {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://confeccaocafebrasil.com.br'
+  const appUrl = 'https://confeccaocafebrasil.com.br'
 
   return (
     <Html lang="pt-BR">

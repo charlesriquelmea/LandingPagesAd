@@ -24,7 +24,7 @@ function formatPrice(cents: number) {
 }
 
 export function OrderConfirmationEmail({ order }: Props) {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://confeccaocafebrasil.com.br'
+  const appUrl = 'https://confeccaocafebrasil.com.br'
 
   return (
     <Html lang="pt-BR">

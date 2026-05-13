@@ -37,7 +37,7 @@ function isValidWhatsApp(value: string): boolean {
   return /^(\+55|55)?(\d{2})(9?\d{8})$/.test(digits)
 }
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5511999999999'
+const WHATSAPP_NUMBER = '5511999999999'
 
 export function CheckoutWhatsApp() {
   const { items, total, clearCart } = useCart()

@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       },
     })
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://confeccaocafebrasil.com.br'
+    const appUrl = 'https://confeccaocafebrasil.com.br'
     const link = await createPaymentLink({
       orderId: order.infinitePayOrderNsu,
       items: data.items.map((item) => ({

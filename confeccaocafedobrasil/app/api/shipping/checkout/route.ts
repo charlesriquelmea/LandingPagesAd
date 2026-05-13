@@ -12,7 +12,7 @@ const schema = z.object({
 export async function POST(request: Request) {
   // Basic admin auth
   const token = request.headers.get('x-admin-token')
-  if (token !== process.env.ADMIN_SECRET) {
+  if (token !== '') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -30,11 +30,11 @@ export async function POST(request: Request) {
 
     const cartItem = await addToCart({
       serviceId: shippingServiceId,
-      fromCep: process.env.SENDER_CEP ?? '37540000',
-      fromName: process.env.SENDER_NAME ?? 'Confecção Café do Brasil',
-      fromAddress: process.env.SENDER_ADDRESS ?? 'Rua das Fazendas, 100',
-      fromCity: process.env.SENDER_CITY ?? 'Poços de Caldas',
-      fromState: process.env.SENDER_STATE ?? 'MG',
+      fromCep: '37540000',
+      fromName: 'Confecção Café do Brasil',
+      fromAddress: 'Rua das Fazendas, 100',
+      fromCity: 'Poços de Caldas',
+      fromState: 'MG',
       toCep: order.addressCep,
       toName: order.customerName,
       toEmail: order.customerEmail,
