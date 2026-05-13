@@ -9,7 +9,10 @@ import { useCart } from '@/hooks/use-cart'
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const itemCount = useCart((s) => s.itemCount())
+
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40)
@@ -55,7 +58,7 @@ export function Navbar() {
           >
             <ShoppingBag size={14} />
             Carrinho
-            {itemCount > 0 && (
+            {mounted && itemCount > 0 && (
               <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-[#3B5249] text-[#F7F3EE] text-[10px] font-bold flex items-center justify-center">
                 {itemCount}
               </span>

@@ -64,7 +64,7 @@ export async function POST(request: Request) {
           id: order.id,
           customerName: order.customerName,
           customerEmail: order.customerEmail,
-          items: order.items.map((i) => ({
+          items: order.items.map((i: typeof order.items[number]) => ({
             name: i.product.name,
             quantity: i.quantity,
             unitPrice: i.unitPrice,
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
         phone: order.customerPhone,
         value: order.totalAmount,
         currency: 'BRL',
-        contentIds: order.items.map((i) => i.productId),
+        contentIds: order.items.map((i: typeof order.items[number]) => i.productId),
       })
     } catch (err) {
       console.error('[webhook/infinitepay] error', err)

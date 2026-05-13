@@ -1,10 +1,8 @@
-const BASE_URL = process.env.MELHOR_ENVIO_SANDBOX === 'true'
-  ? 'https://sandbox.melhorenvio.com.br/api/v2'
-  : 'https://melhorenvio.com.br/api/v2'
+const BASE_URL = 'https://melhorenvio.com.br/api/v2'
 
 function headers() {
   return {
-    Authorization: `Bearer ${process.env.MELHOR_ENVIO_TOKEN}`,
+    Authorization: 'Bearer ',
     'Content-Type': 'application/json',
     Accept: 'application/json',
     'User-Agent': 'Confeccao Cafe do Brasil (pedidos@confeccaocafebrasil.com.br)',

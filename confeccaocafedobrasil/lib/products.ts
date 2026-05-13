@@ -5,6 +5,7 @@ import type { Product } from '@/lib/types'
 export const PRODUCTS: Product[] = [
   {
     id: 'prod_mochila_origins',
+    sku: 'SKU-01',
     slug: 'mochila-cafe-origins',
     name: 'Mochila Café Origins',
     description:
@@ -25,6 +26,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'prod_bolsa_heritage',
+    sku: 'SKU-02',
     slug: 'bolsa-tote-cafe-heritage',
     name: 'Bolsa Tote Café Heritage',
     description:

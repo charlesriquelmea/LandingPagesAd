@@ -1,8 +1,17 @@
-import { Resend } from 'resend'
+import type { Resend } from 'resend'
 import { OrderConfirmationEmail } from '@/emails/order-confirmation'
 import { OrderShippedEmail } from '@/emails/order-shipped'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+let _resend: Resend | null = null
+function getResend(): Resend {
+  if (!_resend) {
+    // Dynamic import to avoid instantiation at module load time
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { Resend: R } = require('resend')
+    _resend = new R('')
+  }
+  return _resend!
+}
 
 export interface OrderEmailData {
   id: string
@@ -27,8 +36,8 @@ export interface OrderEmailData {
 }
 
 export async function sendOrderConfirmation(order: OrderEmailData) {
-  const { data, error } = await resend.emails.send({
-    from: `Confecção Café do Brasil <${process.env.FROM_EMAIL ?? 'pedidos@confeccaocafebrasil.com.br'}>`,
+  const { data, error } = await getResend().emails.send({
+    from: `Confecção Café do Brasil <pedidos@confeccaocafebrasil.com.br>`,
     to: order.customerEmail,
     subject: `Pedido #${order.id} confirmado! ☕`,
     react: OrderConfirmationEmail({ order }),
@@ -41,8 +50,8 @@ export async function sendOrderConfirmation(order: OrderEmailData) {
 export async function sendOrderShipped(
   order: OrderEmailData & { trackingCode: string; estimatedDelivery?: string },
 ) {
-  const { data, error } = await resend.emails.send({
-    from: `Confecção Café do Brasil <${process.env.FROM_EMAIL ?? 'pedidos@confeccaocafebrasil.com.br'}>`,
+  const { data, error } = await getResend().emails.send({
+    from: `Confecção Café do Brasil <pedidos@confeccaocafebrasil.com.br>`,
     to: order.customerEmail,
     subject: `Seu pedido está a caminho! 🚚`,
     react: OrderShippedEmail({ order }),

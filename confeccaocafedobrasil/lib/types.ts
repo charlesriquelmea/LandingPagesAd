@@ -3,6 +3,7 @@ export type ShippingStatus = 'PENDING' | 'LABEL_CREATED' | 'SHIPPED' | 'DELIVERE
 
 export interface Product {
   id: string
+  sku: string
   slug: string
   name: string
   description: string
@@ -77,6 +78,7 @@ export interface ShippingQuote {
 
 export interface CartItem {
   productId: string
+  sku: string
   slug: string
   name: string
   price: number

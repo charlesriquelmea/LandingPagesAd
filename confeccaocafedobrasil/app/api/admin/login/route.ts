@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const { password } = await request.json()
 
-    const adminPassword = process.env.ADMIN_PASSWORD
+    const adminPassword = ''
     if (!adminPassword) {
       return NextResponse.json({ error: 'Admin não configurado' }, { status: 500 })
     }
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const response = NextResponse.json({ ok: true })
     response.cookies.set('admin-token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'lax',
       maxAge: 60 * 60 * 8,
       path: '/',

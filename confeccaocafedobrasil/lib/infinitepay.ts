@@ -39,7 +39,7 @@ export async function createPaymentLink(
   params: CreatePaymentLinkParams,
 ): Promise<CreatePaymentLinkResponse> {
   const body = {
-    handle: process.env.INFINITEPAY_HANDLE,
+    handle: '',
     order_nsu: params.orderId,
     items: params.items,
     redirect_url: params.redirectUrl,
@@ -73,7 +73,7 @@ export async function checkPaymentStatus(params: CheckPaymentParams) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      handle: process.env.INFINITEPAY_HANDLE,
+      handle: '',
       order_nsu: params.orderId,
       transaction_nsu: params.transactionNsu,
       slug: params.slug,
