@@ -48,6 +48,7 @@ export function ProductDetail({ product, crossSell }: Props) {
   function handleAddToCart() {
     addItem({
       productId: product.id,
+      sku: product.sku,
       slug: product.slug,
       name: product.name,
       price: product.price,
