@@ -78,7 +78,7 @@ export function CheckoutStep1({ items, subtotal, onNext }: Props) {
                 <button onClick={() => updateQuantity(item.productId, item.quantity + 1)} className="w-7 h-7 rounded-full border border-[#E8E0D5] flex items-center justify-center hover:bg-[#F7F3EE]">
                   <Plus size={12} />
                 </button>
-                <button onClick={() => removeItem(item.productId)} className="ml-2 text-red-400 hover:text-red-600 transition-colors">
+                <button onClick={() => removeItem(item.productId)} className="ml-2 text-red-400 cursor-pointer hover:text-red-600 transition-colors">
                   <Trash2 size={14} />
                 </button>
               </div>

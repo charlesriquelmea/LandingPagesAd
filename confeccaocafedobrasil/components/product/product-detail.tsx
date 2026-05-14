@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ShoppingBag, Package, Truck, Leaf, ChevronRight, Star } from 'lucide-react'
 import type { Product } from '@/lib/types'
 import { formatPrice } from '@/lib/products'
 import { trackViewContent, trackAddToCart } from '@/lib/pixel'
-import { FreightCalculator } from '@/components/product/freight-calculator'
 import { useCart } from '@/hooks/use-cart'
 
 interface Props {
@@ -38,30 +38,41 @@ const tabContent: Record<string, Record<string, string>> = {
 export function ProductDetail({ product, crossSell }: Props) {
   const [activeImage, setActiveImage] = useState(0)
   const [activeTab, setActiveTab] = useState<'produto' | 'feito' | 'cuidados'>('produto')
-  const { addItem } = useCart()
   const [added, setAdded] = useState(false)
+  const [buying, setBuying] = useState(false)
+  const { addItem } = useCart()
+  const router = useRouter()
 
   useEffect(() => {
     trackViewContent(product.id, product.name, product.price)
   }, [product.id, product.name, product.price])
 
+  const cartPayload = {
+    productId: product.id,
+    sku: product.sku,
+    slug: product.slug,
+    name: product.name,
+    price: product.price,
+    quantity: 1,
+    image: product.images[0] ?? '',
+    weight: product.weight,
+    height: product.height,
+    width: product.width,
+    length: product.length,
+  }
+
   function handleAddToCart() {
-    addItem({
-      productId: product.id,
-      sku: product.sku,
-      slug: product.slug,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      image: product.images[0] ?? '',
-      weight: product.weight,
-      height: product.height,
-      width: product.width,
-      length: product.length,
-    })
+    addItem(cartPayload)
     trackAddToCart(product.id, product.price)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
+  }
+
+  function handleBuyNow() {
+    addItem(cartPayload)
+    trackAddToCart(product.id, product.price)
+    setBuying(true)
+    setTimeout(() => router.push('/checkout'), 1000)
   }
 
   const content = tabContent[product.slug] ?? {}
@@ -113,7 +124,6 @@ export function ProductDetail({ product, crossSell }: Props) {
                   </button>
                 ))}
               </div>
-              {/* Uniqueness note */}
               <div className="bg-[#2C1A0E]/5 rounded-xl p-4 flex gap-3 items-start">
                 <Star size={16} className="text-[#C8A96E] mt-0.5 shrink-0" />
                 <p className="text-xs text-[#555] font-sans leading-relaxed">
@@ -187,10 +197,7 @@ export function ProductDetail({ product, crossSell }: Props) {
                 ))}
               </div>
 
-              {/* Freight calculator */}
-              {/* <FreightCalculator product={product} /> */}
-
-              {/* CTA */}
+              {/* CTAs */}
               <motion.button
                 onClick={handleAddToCart}
                 whileTap={{ scale: 0.97 }}
@@ -202,12 +209,22 @@ export function ProductDetail({ product, crossSell }: Props) {
                 <ShoppingBag size={18} />
                 {added ? 'Adicionado ao carrinho!' : 'Adicionar ao carrinho'}
               </motion.button>
-              <Link
-                href="/checkout"
-                className="block w-full py-4 rounded-full border-2 border-[#2C1A0E] text-[#2C1A0E] font-semibold text-base text-center hover:bg-[#2C1A0E] hover:text-[#F7F3EE] transition-all"
+
+              <motion.button
+                onClick={handleBuyNow}
+                disabled={buying}
+                whileTap={{ scale: 0.97 }}
+                animate={{
+                  backgroundColor: buying ? '#3B5249' : 'transparent',
+                  color: buying ? '#F7F3EE' : '#2C1A0E',
+                  borderColor: buying ? '#3B5249' : '#2C1A0E',
+                }}
+                transition={{ duration: 0.2 }}
+                className="w-full py-4 rounded-full border-2 font-semibold text-base cursor-pointer
+                flex items-center justify-center gap-3"
               >
-                Comprar agora
-              </Link>
+                {buying ? 'Redirecionando...' : 'Comprar agora'}
+              </motion.button>
             </div>
           </div>
 
