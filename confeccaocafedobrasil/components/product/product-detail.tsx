@@ -188,7 +188,7 @@ export function ProductDetail({ product, crossSell }: Props) {
               </div>
 
               {/* Freight calculator */}
-              <FreightCalculator product={product} />
+              {/* <FreightCalculator product={product} /> */}
 
               {/* CTA */}
               <motion.button
@@ -196,7 +196,8 @@ export function ProductDetail({ product, crossSell }: Props) {
                 whileTap={{ scale: 0.97 }}
                 animate={{ backgroundColor: added ? '#3B5249' : '#2C1A0E' }}
                 transition={{ duration: 0.2 }}
-                className="w-full py-4 rounded-full text-[#F7F3EE] font-semibold text-base flex items-center justify-center gap-3 shadow-lg"
+                className="w-full py-4 rounded-full text-[#F7F3EE] font-semibold text-base cursor-pointer
+                flex items-center justify-center gap-3 shadow-lg"
               >
                 <ShoppingBag size={18} />
                 {added ? 'Adicionado ao carrinho!' : 'Adicionar ao carrinho'}
@@ -237,13 +238,16 @@ export function ProductDetail({ product, crossSell }: Props) {
           <p className="font-serif font-bold text-[#2C1A0E]">{formatPrice(product.price)}</p>
           <p className="text-xs text-[#999] font-sans">3× s/ juros</p>
         </div>
-        <button
+        <motion.button
           onClick={handleAddToCart}
-          className="bg-[#2C1A0E] text-[#F7F3EE] font-semibold px-6 py-3 rounded-full text-sm flex items-center gap-2"
+          whileTap={{ scale: 0.97 }}
+          animate={{ backgroundColor: added ? '#3B5249' : '#2C1A0E' }}
+          transition={{ duration: 0.2 }}
+          className="text-[#F7F3EE] font-semibold px-6 py-3 rounded-full text-sm flex items-center gap-2"
         >
           <ShoppingBag size={16} />
-          Comprar agora
-        </button>
+          {added ? 'Adicionado!' : 'Adicionar ao carrinho'}
+        </motion.button>
       </div>
     </>
   )
