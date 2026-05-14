@@ -22,14 +22,14 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#2C1A0E]/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300  ${
+        scrolled ? 'bg-[#2C1A0E]/95 backdrop-blur-md shadow-lg' : 'bg-transparent '
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-tight group">
-          <span className="font-serif text-base font-semibold text-[#F7F3EE] tracking-wide group-hover:text-[#C8A96E] transition-colors">
+          <span className="font-serif text-base font-semibold text-[#72706d] tracking-wide group-hover:text-[#C8A96E] transition-colors">
             Café do Brasil
           </span>
           <span className="text-[10px] text-[#C8A96E] tracking-[0.25em] uppercase font-sans">
@@ -69,7 +69,7 @@ export function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-[#F7F3EE] p-1"
+          className="md:hidden text-[#C8A96E] p-1"
           aria-label="Menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
