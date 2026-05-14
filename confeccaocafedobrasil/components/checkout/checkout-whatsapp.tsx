@@ -164,7 +164,7 @@ export function CheckoutWhatsApp() {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="h-5 w-5 sm:h-6 sm:w-6 rounded-full border-[#E8E0D5]"
+                      className="h-5 w-5 cursor-pointer sm:h-6 sm:w-6 rounded-full border-[#E8E0D5]"
                       onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                       disabled={item.quantity <= 1}
                     >
@@ -174,7 +174,7 @@ export function CheckoutWhatsApp() {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="h-5 w-5 sm:h-6 sm:w-6 rounded-full border-[#E8E0D5]"
+                      className="h-5 w-5 sm:h-6 sm:w-6 rounded-full cursor-pointer border-[#E8E0D5]"
                       onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                     >
                       <Plus size={12} />
@@ -185,7 +185,7 @@ export function CheckoutWhatsApp() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-red-500 hover:text-red-700 h-7 w-7 sm:h-8 sm:w-8"
+                    className="text-red-500 hover:text-red-700 h-7 w-7 sm:h-8 sm:w-8 cursor-pointer"
                     onClick={() => setItemToRemove(item)}
                   >
                     <Trash2 size={15} />
