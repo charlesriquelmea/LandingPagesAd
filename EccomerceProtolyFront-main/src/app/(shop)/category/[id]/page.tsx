@@ -13,14 +13,18 @@ interface Props {
 export default function CategoryPage({ params }: Props) {
   const { id } = params;
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
         const filteredProducts = await filterProductsByCategory(id);
         setProducts(filteredProducts);
       } catch (error) {
         console.error("Error obteniendo productos por categoría:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -29,7 +33,7 @@ export default function CategoryPage({ params }: Props) {
 
   return (
     <div className="mt-4">
-      <FilteredProducts products={products} />
+      <FilteredProducts products={products} loading={loading} />
     </div>
   );
 }

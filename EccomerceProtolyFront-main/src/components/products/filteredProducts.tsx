@@ -42,7 +42,7 @@ const HorizontalScrollRow = ({ section, products }: { section: string; products:
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {products.map((product) => (
-            <div key={product.nombre} className="flex-shrink-0 w-[160px] sm:w-[180px]" style={{ scrollSnapAlign: 'start' }}>
+            <div key={product.id ?? product.nombre} className="flex-shrink-0 w-[160px] sm:w-[180px]" style={{ scrollSnapAlign: 'start' }}>
               <ProductGridItem product={product} />
             </div>
           ))}
@@ -68,11 +68,29 @@ const HorizontalScrollRow = ({ section, products }: { section: string; products:
   );
 };
 
+const SkeletonRow = () => (
+  <div>
+    <div className="h-5 bg-gray-200 rounded w-40 mb-3 animate-pulse" />
+    <div className="flex gap-2.5 overflow-hidden">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="flex-shrink-0 w-[160px] sm:w-[180px] bg-white rounded-xl overflow-hidden animate-pulse">
+          <div className="aspect-square bg-gray-200" />
+          <div className="p-3 space-y-2">
+            <div className="h-4 bg-gray-200 rounded w-3/4" />
+            <div className="h-5 bg-gray-200 rounded w-1/4" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 interface FilteredProductsProps {
   products: Product[];
+  loading?: boolean;
 }
 
-export const FilteredProducts: React.FC<FilteredProductsProps> = ({ products }) => {
+export const FilteredProducts: React.FC<FilteredProductsProps> = ({ products, loading }) => {
   const grouped = useMemo(() => {
     const map: Record<string, Product[]> = {};
     for (const p of products) {
@@ -84,6 +102,16 @@ export const FilteredProducts: React.FC<FilteredProductsProps> = ({ products }) 
   }, [products]);
 
   const sectionKeys = Object.keys(grouped);
+
+  if (loading) {
+    return (
+      <div className="px-4 sm:px-8 max-w-7xl mx-auto space-y-8">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <SkeletonRow key={i} />
+        ))}
+      </div>
+    );
+  }
 
   if (sectionKeys.length === 0) {
     return (

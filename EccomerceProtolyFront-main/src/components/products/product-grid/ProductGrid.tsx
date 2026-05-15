@@ -43,7 +43,7 @@ const HorizontalScrollRow = ({ section, products }: { section: string; products:
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {products.map((product) => (
-            <div key={product.nombre} className="flex-shrink-0 w-[160px] sm:w-[180px]" style={{ scrollSnapAlign: 'start' }}>
+            <div key={product.id ?? product.nombre} className="flex-shrink-0 w-[160px] sm:w-[180px]" style={{ scrollSnapAlign: 'start' }}>
               <ProductGridItem product={product} />
             </div>
           ))}
