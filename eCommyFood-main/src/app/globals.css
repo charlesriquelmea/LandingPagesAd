@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #274494;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */ 
+
+body {
+
+  background: rgb(243, 243, 243);
+
+}
+
+
+
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+} 
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fade-in {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
+}
+
+
+
+
+
+/* Para los swiper */
+.container-carousel {
+  height: 100%;
+  position: relative;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* .swiper-pagination-bullet {
+  background-color: white;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #57cdb3; 
+ 
+} */
+
+
+
+
+
+
+/* BREAK POINTS PARA LAS CARDS */
+/* Estilos para dispositivos extra pequeños (menos de 320px) */
+@media (max-width: 320px) {
+  /* Estilos específicos para dispositivos extra pequeños */
+  .card{
+    width:150px;
+    height:250px;
+  }
+
+
+}
+
+/* Estilos para dispositivos pequeños (321px o más) */
+@media (min-width: 321px) {
+  /* Estilos específicos para dispositivos extra pequeños */
+  .card{
+    width:170px;
+    height:250px;
+  }
+
+
+}
+
+/* Estilos para dispositivos pequeños (413px o más) */
+@media (min-width: 413px) {
+  /* Estilos específicos para dispositivos pequeños */
+  .card{
+    width:195px;
+    height:280px;
+  }
+}
+
+/* Estilos para dispositivos pequeños (636px o más) */
+@media (min-width: 636px) {
+  /* Estilos específicos para dispositivos pequeños */
+  .card{
+    width:230px;
+    height:300px;
+  }
+}
+
+/* Estilos para dispositivos medianos (768px o más) */
+@media (min-width: 768px) {
+  /* Estilos específicos para dispositivos medianos */
+  .card{
+    width:260px;
+    height:300px;
+  }
+}
+
+/* Estilos para dispositivos grandes (992px o más) */
+@media (min-width: 992px) {
+  /* Estilos específicos para dispositivos grandes */
+  .card{
+    width:270px;
+    height:320px;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  /* Estilos específicos para dispositivos extra grandes */
+  .card{
+    /* min-width:170px; */
+    width:220px;
+    height:330px;
+  }
+}
+
+@media (min-width: 1400px) {
+  /* Estilos específicos para dispositivos extra grandes */
+  .card{
+    /* min-width:170px; */
+    width:280px;
+    height:350px;
+  }
+}
