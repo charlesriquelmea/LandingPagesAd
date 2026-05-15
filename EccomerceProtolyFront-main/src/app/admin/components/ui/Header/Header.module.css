@@ -1,0 +1,13 @@
+
+
+
+/* Custom style */
+.headerRight {
+  width: calc(100% - 3.5rem);
+}
+
+@media only screen and (min-width: 768px) {
+  .headerRight {
+    width: calc(100% - 16rem);
+  }
+}
