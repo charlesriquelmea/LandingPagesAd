@@ -1,12 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { IoSearchOutline, IoCartOutline, IoPersonOutline } from "react-icons/io5";
+import { IoSearchOutline, IoPersonOutline, IoWaterOutline, IoFastFoodOutline, IoIceCreamOutline, IoEggOutline, IoPizzaOutline, IoCubeOutline, IoSnowOutline, IoSparklesOutline } from "react-icons/io5";
 import { titleFont } from "@/config/fonts";
 import useCategoriesStore from "@/store/categories/categories-store";
 import useLoginStore from "@/store/userauth/login-store";
-import { useEffect } from "react";
+import { useEffect, ReactNode } from "react";
 import { OffCanvas } from "../offcanvas/OffCanvas";
+
+const categoryIcons: Record<string, ReactNode> = {
+  'Bebidas': <IoWaterOutline className="w-4 h-4" />,
+  'Snacks': <IoFastFoodOutline className="w-4 h-4" />,
+  'Dulces y Postres': <IoIceCreamOutline className="w-4 h-4" />,
+  'Lácteos y Huevos': <IoEggOutline className="w-4 h-4" />,
+  'Pan y Repostería': <IoPizzaOutline className="w-4 h-4" />,
+  'Enlatados y Conservas': <IoCubeOutline className="w-4 h-4" />,
+  'Congelados': <IoSnowOutline className="w-4 h-4" />,
+  'Limpieza': <IoSparklesOutline className="w-4 h-4" />,
+};
 
 export const TopMenu = () => {
   const getCategories = useCategoriesStore((state) => state.getCategories);
@@ -72,8 +83,9 @@ export const TopMenu = () => {
               <Link
                 key={category.nombre}
                 href={`/category/${category.nombre.toLocaleLowerCase()}`}
-                className="flex-shrink-0 text-sm px-4 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 hover:text-accent transition-all font-medium"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 hover:text-accent transition-all font-medium"
               >
+                {categoryIcons[category.nombre]}
                 {category.nombre}
               </Link>
             ))}

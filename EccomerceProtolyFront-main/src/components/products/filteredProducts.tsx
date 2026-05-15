@@ -7,19 +7,13 @@ interface FilteredProductsProps {
 
 export const FilteredProducts: React.FC<FilteredProductsProps> = ({ products }) => {
   return (
-    <div className="flex flex-wrap justify-center gap-5 mx-auto mb-10
-    sm:justify-start sm:mx-10
-    md:justify-center md:mx-10
-    lg:justify-center lg:mx-auto lg:max-w-6xl
-    xl:justify-center xl:mx-auto xl:max-w-7xl" 
->
-      
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 px-4 sm:px-8 max-w-7xl mx-auto">
       {products.map((product) => (
-        <ProductGridItem 
+        <ProductGridItem
           key={product.nombre}
           product={product}
         />
       ))}
     </div>
   );
-}
+};
