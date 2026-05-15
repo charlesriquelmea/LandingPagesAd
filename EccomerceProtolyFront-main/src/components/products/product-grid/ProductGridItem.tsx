@@ -29,7 +29,8 @@ export const ProductGridItem = ({ product }: Props) => {
 
   return (
     <>
-      <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm
+       hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
         <button
           onClick={() => setIsModalOpen(true)}
           className="w-full text-left"
@@ -54,7 +55,9 @@ export const ProductGridItem = ({ product }: Props) => {
           </div>
           <button
             onClick={handleQuickAdd}
-            className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-accent text-white text-lg font-bold hover:bg-red-700 transition-colors active:scale-90 shadow-sm"
+            className="flex-shrink-0 w-8 h-8 flex items-center justify-center
+             rounded-full bg-accent text-black text-lg font-bold
+              bg-white hover:bg-slate-300 transition-colors active:scale-90 shadow-sm"
           >
             +
           </button>

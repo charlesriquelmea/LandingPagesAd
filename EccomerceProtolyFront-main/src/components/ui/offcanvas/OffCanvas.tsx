@@ -13,6 +13,7 @@ export const OffCanvas = () => {
   const [cartItems, setCartItems] = useState<CartProduct[]>([]);
 
   const cartStore = useCartStore();
+  const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
     setCartItems(cartStore.cart);
@@ -38,12 +39,22 @@ export const OffCanvas = () => {
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <h2 className="text-lg font-bold">Tu carrito</h2>
-          <button
-            onClick={closeSideMenu}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <IoClose className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            {cartItems.length > 0 && (
+              <button
+                onClick={clearCart}
+                className="text-xs font-medium text-gray-400 hover:text-red-500 transition-colors"
+              >
+                Vaciar
+              </button>
+            )}
+            <button
+              onClick={closeSideMenu}
+              className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <IoClose className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         <div className="p-4 space-y-3">
