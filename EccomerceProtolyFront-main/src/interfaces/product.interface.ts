@@ -8,6 +8,7 @@ export interface Product {
     precio: number;
     inventario: string;
     categoriaId: number;
+    subcategoria?: string;
     Categoria?: Categoria;
 }
 

@@ -1,5 +1,6 @@
  export * from './ui/ui-store';
  export * from './ui/modal-store';
+ export * from './ui/hamburger-store';
  export * from './categories/categories-store';
  export * from './products/products-store';
  export * from './storage/auth-store';

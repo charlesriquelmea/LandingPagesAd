@@ -1,7 +1,7 @@
 'use client';
 
 import { ProductGridItem } from "./ProductGridItem"
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import useProductsStore from "@/store/products/products-store";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -10,6 +10,7 @@ export const ProductGrid = () => {
     const products = useProductsStore((state) => state.products);
     const loading = useProductsStore((state) => state.loading);
     const [search, setSearch] = useState("");
+    const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
     useEffect(() => {
         getProducts();
@@ -23,6 +24,18 @@ export const ProductGrid = () => {
         p.descripcion.toLowerCase().includes(q)
       );
     }, [products, search]);
+
+    const grouped = useMemo(() => {
+      const map: Record<string, typeof filtered> = {};
+      for (const p of filtered) {
+        const key = p.subcategoria || 'Otros';
+        if (!map[key]) map[key] = [];
+        map[key].push(p);
+      }
+      return map;
+    }, [filtered]);
+
+    const sectionKeys = Object.keys(grouped);
 
     if (loading) {
       return (
@@ -60,9 +73,16 @@ export const ProductGrid = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
-            {filtered.map((product) => (
-              <ProductGridItem key={product.nombre} product={product} />
+          <div className="space-y-8">
+            {sectionKeys.map((section) => (
+              <div key={section} ref={(el) => { sectionRefs.current[section] = el; }}>
+                <h2 className="text-lg font-bold text-gray-900 mb-3">{section}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
+                  {grouped[section].map((product) => (
+                    <ProductGridItem key={product.nombre} product={product} />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         )}

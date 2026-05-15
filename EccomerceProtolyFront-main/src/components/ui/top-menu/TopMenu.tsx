@@ -1,22 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { IoSearchOutline, IoPersonOutline, IoWaterOutline, IoFastFoodOutline, IoIceCreamOutline, IoEggOutline, IoPizzaOutline, IoCubeOutline, IoSnowOutline, IoSparklesOutline } from "react-icons/io5";
+import { IoSearchOutline, IoPersonOutline, IoMenuOutline } from "react-icons/io5";
 import { titleFont } from "@/config/fonts";
 import useCategoriesStore from "@/store/categories/categories-store";
 import useLoginStore from "@/store/userauth/login-store";
-import { useEffect, ReactNode } from "react";
+import { useEffect, useRef } from "react";
 import { OffCanvas } from "../offcanvas/OffCanvas";
+import { DoorDashSidebar } from "../hamburger/DoorDashSidebar";
+import { useHamburgerStore } from "@/store/ui/hamburger-store";
 
-const categoryIcons: Record<string, ReactNode> = {
-  'Bebidas': <IoWaterOutline className="w-4 h-4" />,
-  'Snacks': <IoFastFoodOutline className="w-4 h-4" />,
-  'Dulces y Postres': <IoIceCreamOutline className="w-4 h-4" />,
-  'Lácteos y Huevos': <IoEggOutline className="w-4 h-4" />,
-  'Pan y Repostería': <IoPizzaOutline className="w-4 h-4" />,
-  'Enlatados y Conservas': <IoCubeOutline className="w-4 h-4" />,
-  'Congelados': <IoSnowOutline className="w-4 h-4" />,
-  'Limpieza': <IoSparklesOutline className="w-4 h-4" />,
+const categoryEmojis: Record<string, string> = {
+  'Bebidas': '🥤',
+  'Snacks': '🍿',
+  'Dulces y Postres': '🍪',
+  'Lácteos y Huevos': '🥛',
+  'Pan y Repostería': '🥖',
+  'Enlatados y Conservas': '🥫',
+  'Congelados': '🧊',
+  'Limpieza': '🧹',
+  'Alcohol': '🍺',
 };
 
 export const TopMenu = () => {
@@ -24,21 +27,41 @@ export const TopMenu = () => {
   const categories = useCategoriesStore((state) => state.categories);
   const getSesion = useLoginStore((state) => state.getSesion);
   const sesion = useLoginStore((state) => state.sesion);
+  const openHamburger = useHamburgerStore((state) => state.openHamburger);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getCategories();
     getSesion();
   }, []);
 
+  const scroll = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const amount = 200;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
   return (
     <div className="bg-white flex flex-col fixed w-full z-20 shadow-sm">
+      <DoorDashSidebar />
+
       <nav className="flex items-center justify-between px-4 sm:px-8 h-16 max-w-7xl mx-auto w-full">
 
-        <Link href="/">
-          <span className={`${titleFont.className} antialiased font-bold text-xl tracking-tight`}>
-            Market
-          </span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={openHamburger}
+            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Menú"
+          >
+            <IoMenuOutline className="w-5 h-5" />
+          </button>
+
+          <Link href="/">
+            <span className={`${titleFont.className} antialiased font-bold text-xl tracking-tight`}>
+              Market
+            </span>
+          </Link>
+        </div>
 
         <div className="hidden sm:flex flex-1 max-w-xl mx-6">
           <div className="relative w-full">
@@ -77,18 +100,39 @@ export const TopMenu = () => {
       </nav>
 
       {categories.length > 0 && (
-        <div className="border-t border-gray-100">
-          <div className="flex items-center gap-2 px-4 sm:px-8 h-12 max-w-7xl mx-auto w-full overflow-x-auto scrollbar-hide">
-            {categories.map((category) => (
-              <Link
-                key={category.nombre}
-                href={`/category/${category.nombre.toLocaleLowerCase()}`}
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 hover:text-accent transition-all font-medium"
-              >
-                {categoryIcons[category.nombre]}
-                {category.nombre}
-              </Link>
-            ))}
+        <div className="border-t border-gray-100 relative">
+          <div className="max-w-7xl mx-auto w-full flex items-center px-4 sm:px-8">
+            <button
+              onClick={() => scroll('left')}
+              className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors text-gray-600 text-lg font-bold mr-2"
+              aria-label="Anterior"
+            >
+              ‹
+            </button>
+
+            <div
+              ref={scrollRef}
+              className="flex items-center gap-2 h-12 overflow-x-auto scrollbar-hide flex-1"
+            >
+              {categories.map((category) => (
+                <Link
+                  key={category.nombre}
+                  href={`/category/${category.nombre.toLocaleLowerCase()}`}
+                  className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 hover:text-accent transition-all font-medium"
+                >
+                  <span className="text-base">{categoryEmojis[category.nombre] || '📦'}</span>
+                  {category.nombre}
+                </Link>
+              ))}
+            </div>
+
+            <button
+              onClick={() => scroll('right')}
+              className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors text-gray-600 text-lg font-bold ml-2"
+              aria-label="Siguiente"
+            >
+              ›
+            </button>
           </div>
         </div>
       )}

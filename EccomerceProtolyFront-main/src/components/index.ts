@@ -21,5 +21,6 @@ export * from './ui/sidebar/Sidebar';
 export * from './ui/modal/Modal';
 export * from './ui/swiper/BannerSwiper';
 export * from './ui/offcanvas/OffCanvas';
+export * from './ui/hamburger/DoorDashSidebar';
 
 
