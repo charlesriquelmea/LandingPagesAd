@@ -1,5 +1,3 @@
-
-
 export interface Product {
     id?: number;
     nombre: string;
@@ -10,6 +8,13 @@ export interface Product {
     categoriaId: number;
     subcategoria?: string;
     Categoria?: Categoria;
+    tamano?: string;
+    precioPorUnidad?: string;
+    snapElegible?: boolean;
+    sabor?: string;
+    detalles?: string;
+    especificaciones?: string;
+    ingredientes?: string;
 }
 
 export interface Categoria {
@@ -24,4 +29,3 @@ export interface CartProduct {
     image: string;
     nombre: string
   }
-  
